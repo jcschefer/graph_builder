@@ -18,7 +18,7 @@ type ChannelRequest struct {
 /////////////////////////////////////////////////////////////////////////////////////////
 //
 func main() {
-   fmt.Println("Begin Test")
+   fmt.Println("Go:")
    //
    file, err := os.Open("words.txt")
    check(err)
@@ -31,31 +31,29 @@ func main() {
    check(scanner.Err())
    //
    tic := time.Now()
-   g1 := naive(words)
+   naive(words)
    toc := time.Now()
-   fmt.Printf("Naive approach: %v\n", toc.Sub(tic))
-   fmt.Printf("Neighbors of abased: %v\n", g1["abased"])
+   fmt.Printf("   Naive approach: %v seconds", toc.Sub(tic).Seconds())
    //
    //
    fmt.Println()
    tic = time.Now()
-   g2:= reverse(words)
+   reverse(words)
    toc = time.Now()
-   fmt.Printf("Reverse approach: %v\n", toc.Sub(tic))
-   fmt.Printf("Neighbors of abased: %v\n", g2["abased"])
+   fmt.Printf("   Reverse approach: %v seconds", toc.Sub(tic).Seconds())
    //
    //
    fmt.Println()
    tic = time.Now()
-   g3:= naiveGoRoutines(words)
+   naiveGoRoutines(words)
    toc = time.Now()
-   fmt.Printf("GoRoutine approach: %v\n", toc.Sub(tic))
-   fmt.Printf("Neighbors of abased: %v\n", g3["abased"])
+   fmt.Printf("   GoRoutine approach: %v seconds\n", toc.Sub(tic).Seconds())
+   //
 }
 //
 /////////////////////////////////////////////////////////////////////////////////////////
 //
-func naive(words []string) WordGraph {
+func naive(words []string) {
    graph := make(WordGraph)
    //
    for _,w := range words {
@@ -67,13 +65,11 @@ func naive(words []string) WordGraph {
       }
       graph[w] = nbrs
    }
-   //
-   return graph
 }
 //
 /////////////////////////////////////////////////////////////////////////////////////////
 //
-func reverse(words []string) WordGraph {
+func reverse(words []string) {
    graph := make(WordGraph)
    set := make(StringSet)
    for _,w := range words {
@@ -94,12 +90,11 @@ func reverse(words []string) WordGraph {
       }
       graph[w] = nbrs
    }
-   return graph
 }
 //
 /////////////////////////////////////////////////////////////////////////////////////////
 //
-func naiveGoRoutines(words []string) WordGraph {
+func naiveGoRoutines(words []string) {
    graph := make(WordGraph)
    myChan := make(chan ChannelRequest)
    //
@@ -112,7 +107,6 @@ func naiveGoRoutines(words []string) WordGraph {
       graph[req.baseword] = req.nbrs
    }
    //
-   return graph
 }
 //
 /////////////////////////////////////////////////////////////////////////////////////////

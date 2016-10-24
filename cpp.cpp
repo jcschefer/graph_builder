@@ -25,6 +25,7 @@ bool isNeighbor( string a, string b );
 //
 int main()
 {
+   cout << "C++: " << endl;
    string words[N];
    //
    ifstream infile("words.txt");
@@ -37,28 +38,14 @@ int main()
    WordGraph g1 = naive( words );
    auto toc = chrono::high_resolution_clock::now();
    chrono::duration< double > time1 = chrono::duration_cast< chrono::duration< double > >(toc - tic);
-   cout << "Naive approach: " << time1.count() << " seconds" << endl;
-   //
-   cout << "abased nbrs: "  << endl;
-   vector<string> nb = g1["abased"];
-   for(auto i : nb)
-   {
-      cout << "   " + i  << endl;
-   }
+   cout << "   Naive approach: " << time1.count() << " seconds" << endl;
    //
    tic = chrono::high_resolution_clock::now();
    WordGraph g2 = reverse( words );
    toc = chrono::high_resolution_clock::now();
    chrono::duration< double > time2 = chrono::duration_cast< chrono::duration< double > >(toc - tic);
-   cout << "\n\nReverse approach: " << time2.count() << " seconds" << endl;
+   cout << "   Reverse approach: " << time2.count() << " seconds" << endl;
    //
-   cout << "abased nbrs: "  << endl;
-   vector< string > nb2 = g2["abased"];
-   for( auto i : nb2 )
-   {
-      cout << "   " + i  << endl;
-   }
-   cout << "testing comlete" << endl;
    //
 }
 //

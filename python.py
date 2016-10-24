@@ -65,23 +65,18 @@ def reverse(words):
 #
 if __name__ == '__main__':
   wordList = open('words.txt').read().split()
+  print('Python:')
   tic = time()
   g1 = naive(wordList)
   toc = time()
   t1 = toc - tic
-  print('Naive Approach: ', t1, ' seconds')
-  print('abased nbrs: ', g1['abased'])
+  print('   Naive Approach: ', t1, ' seconds')
   #
   tic = time()
   g2 = reverse(wordList)
   toc = time()
   t2 = toc - tic
-  print('Reverse Engineered Approach: ', t2, ' seconds')
-  print('abased nbrs: ', g2['abased'])
-  #
-  percent = t2 / t1 * 100
-  if g1 == g2: print('Same graph built in ', percent, '% of the time.')
-  else: print('Different result')
+  print('   Reverse Approach: ', t2, ' seconds')
   #
 #
 # End of file.
