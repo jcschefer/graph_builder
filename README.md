@@ -5,6 +5,9 @@ Python, C++, and Go implementations of the same graph-building problem. Used to 
 <code>$ ./compare.sh</code> will provide a nicely formatted output for you.
 
 Dependencies:
-   Python3
-   g++ compiler
-   Go 
+<ul>
+   <li>Python3</li>
+   <li>g++ compiler</li>
+   <li>Java (JDK and JRE)</li>
+   <li>Go</li> 
+</ul>

@@ -38,13 +38,13 @@ int main()
    WordGraph g1 = naive( words );
    auto toc = chrono::high_resolution_clock::now();
    chrono::duration< double > time1 = chrono::duration_cast< chrono::duration< double > >(toc - tic);
-   cout << "   Naive approach: " << time1.count() << " seconds" << endl;
+   cout << "   Naive Approach: " << time1.count() << " seconds" << endl;
    //
    tic = chrono::high_resolution_clock::now();
    WordGraph g2 = reverse( words );
    toc = chrono::high_resolution_clock::now();
    chrono::duration< double > time2 = chrono::duration_cast< chrono::duration< double > >(toc - tic);
-   cout << "   Reverse approach: " << time2.count() << " seconds" << endl;
+   cout << "   Reverse Approach: " << time2.count() << " seconds" << endl;
    //
    //
 }

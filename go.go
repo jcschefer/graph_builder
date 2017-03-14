@@ -33,21 +33,21 @@ func main() {
    tic := time.Now()
    naive(words)
    toc := time.Now()
-   fmt.Printf("   Naive approach: %v seconds", toc.Sub(tic).Seconds())
+   fmt.Printf("   Naive Approach: %v seconds", toc.Sub(tic).Seconds())
    //
    //
    fmt.Println()
    tic = time.Now()
    reverse(words)
    toc = time.Now()
-   fmt.Printf("   Reverse approach: %v seconds", toc.Sub(tic).Seconds())
+   fmt.Printf("   Reverse Approach: %v seconds", toc.Sub(tic).Seconds())
    //
    //
    fmt.Println()
    tic = time.Now()
    naiveGoRoutines(words)
    toc = time.Now()
-   fmt.Printf("   GoRoutine approach: %v seconds\n", toc.Sub(tic).Seconds())
+   fmt.Printf("   GoRoutine Approach: %v seconds\n", toc.Sub(tic).Seconds())
    //
 }
 //
