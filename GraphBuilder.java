@@ -38,15 +38,15 @@ class GraphBuilder
       //
       breader.close() ;
       //
-      long tic = System.currentTimeMillis() ;
+      long tic = System.nanoTime() ;
       Map<String, Set<String>> g1 = naive() ;
-      long toc = System.currentTimeMillis() ;
-      System.out.println( "   Naive Approach: " + (toc - tic) / 1000.0 + " seconds" ) ;
+      long toc = System.nanoTime() ;
+      System.out.println( "   Naive Approach: " + (toc - tic) / 1000000000.0 + " seconds" ) ;
       //
-      tic = System.currentTimeMillis() ;
+      tic = System.nanoTime() ;
       Map<String, Set<String>> g2 = reverse() ;
-      toc = System.currentTimeMillis() ;
-      System.out.println( "   Reverse Approach: " + (toc - tic) / 1000.0 + " seconds" ) ;
+      toc = System.nanoTime() ;
+      System.out.println( "   Reverse Approach: " + (toc - tic) / 1000000000.0 + " seconds" ) ;
    }
    //
    //////////////////////////////////////////////////////////
