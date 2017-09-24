@@ -21,7 +21,7 @@ typedef map< string, vector< string > > WordGraph;
 WordGraph naive( string words[N] );
 WordGraph reverse( string words[N] );
 WordGraph parallelReverse( string words[N] );
-void addWordHelper(unordered_set<string> wordSet, string word, const string* letters);
+void addWordHelper(const unordered_set<string> & wordSet, string word, const string* letters);
 bool isNeighbor( string a, string b );
 //
 WordGraph parallelGraph;
@@ -169,7 +169,7 @@ WordGraph parallelReverse( string words[N] )
 //
 /////////////////////////////////////////////////////////////////////////////////////////
 //
-void addWordHelper(unordered_set<string> wordSet, string word, const string* letters)
+void addWordHelper( const unordered_set<string> & wordSet, string word, const string* letters)
 {
 	vector< string > nbrs;
 	for ( int j = 0; j < word.length(); j++ )
