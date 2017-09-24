@@ -10,6 +10,7 @@
 #include <chrono>
 #include <unordered_set>
 #include <algorithm>
+#include <thread>
 //
 using namespace std;
 //
@@ -19,7 +20,11 @@ typedef map< string, vector< string > > WordGraph;
 //
 WordGraph naive( string words[N] );
 WordGraph reverse( string words[N] );
+WordGraph parallelReverse( string words[N] );
+void addWordHelper(unordered_set<string> wordSet, string word, const string* letters);
 bool isNeighbor( string a, string b );
+//
+WordGraph parallelGraph;
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -45,6 +50,12 @@ int main()
    toc = chrono::high_resolution_clock::now();
    chrono::duration< double > time2 = chrono::duration_cast< chrono::duration< double > >(toc - tic);
    cout << "   Reverse Approach: " << time2.count() << " seconds" << endl;
+   //
+   tic = chrono::high_resolution_clock::now();
+   WordGraph g3 = parallelReverse( words );
+   toc = chrono::high_resolution_clock::now();
+   chrono::duration< double > time3 = chrono::duration_cast< chrono::duration< double > >(toc - tic);
+   cout << "   Parallelized Reverse Approach: " << time3.count() << " seconds" << endl;
    //
    //
 }
@@ -117,6 +128,64 @@ WordGraph reverse( string words[N] )
    }
    //
    return g;
+}
+//
+/////////////////////////////////////////////////////////////////////////////////////////
+//
+WordGraph parallelReverse( string words[N] )
+{
+   const int WORD_LEN = words[0].length();
+   char start = 'a';
+   string letters[26];
+   for ( int i = 0; i < 26; i++ )
+   {
+      letters[i] = string( 1, static_cast< char >( start + i ) );
+   }
+   //
+   unordered_set< string > wordSet;
+   //
+   for ( int i = 0; i < N; i++ )
+   {
+      //
+      wordSet.insert( words[i] );   
+      //
+   }
+   //
+   thread threads[N];
+   for ( int i = 0; i < N; i++ )
+   {
+      string word = words[i];
+	  threads[i] = thread(addWordHelper, wordSet, word, letters);
+      //
+   }
+   //
+   for ( int i = 0; i < N; i++)
+   {
+      threads[i].join();
+   }
+   //
+   return parallelGraph;
+}
+//
+/////////////////////////////////////////////////////////////////////////////////////////
+//
+void addWordHelper(unordered_set<string> wordSet, string word, const string* letters)
+{
+	vector< string > nbrs;
+	for ( int j = 0; j < word.length(); j++ )
+	{
+	   for ( int k = 0; k < 26; k++ )
+	   {
+	      string newW = word.substr( 0, j ) + letters[k] + word.substr( j + 1 );
+	      if ( newW != word && find( nbrs.begin(), nbrs.end(), newW ) == nbrs.end() && wordSet.find( newW ) != wordSet.end() )
+	      {
+	         nbrs.push_back( newW );
+	      }
+	   }
+	}
+	//
+	sort( nbrs.begin(), nbrs.end() );
+	parallelGraph[ word ] = nbrs;
 }
 //
 /////////////////////////////////////////////////////////////////////////////////////////
